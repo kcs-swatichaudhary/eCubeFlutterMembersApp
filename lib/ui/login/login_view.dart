@@ -46,22 +46,22 @@ class _LoginScreenState extends State<LoginScreen> {
       home: new Scaffold(
         body: new SingleChildScrollView(
             child: new Column(
-          children: <Widget>[
-            new Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-            ),
-            new Image(image: AssetImage("assets/appicon.jpeg")),
-            new Text("Sign into access your Membership Account!"),
-            new Container(
-              margin: new EdgeInsets.all(15.0),
-              child: new Form(
-                key: _formKey,
-                autovalidate: _validate,
-                child: FormUI(),
-              ),
-            ),
-          ],
-        )),
+              children: <Widget>[
+                new Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                ),
+                new Image(image: AssetImage("assets/appicon.jpeg")),
+                new Text("Sign into access your Membership Account!"),
+                new Container(
+                  margin: new EdgeInsets.all(15.0),
+                  child: new Form(
+                    key: _formKey,
+                    autovalidate: _validate,
+                    child: FormUI(),
+                  ),
+                ),
+              ],
+            )),
       ),
     );
   }
@@ -100,12 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     });
   }*/
-  Future<LoginResponseModels> createAlbum(String memberCode,String password) async {
+  Future<LoginResponseModels> createAlbum(String memberCode,
+      String password) async {
     final http.Response response = await http.get(
-      API_GET_LOGIN+'strMemberCode=$memberCode&strWebPassword=$password',
+      API_GET_LOGIN + 'strMemberCode=$memberCode&strWebPassword=$password',
       headers: <String, String>{
         'Content-Type': 'application/json',
-        'SecurityKey':'RXZlbnRFbnRyeQ=='
+        'SecurityKey': 'RXZlbnRFbnRyeQ=='
       },
     );
 
@@ -117,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resultData=(json.decode(response.body) as List).map((i) =>
           LoginResponseResultModel.fromJson(i)).toList();*/
       Map<String, dynamic> map = json.decode(response.body);
-      LoginResponseResultModel resultData  = map["_result"];
+      List<LoginResponseResultModel> resultData = map.values.toList()[3].forEach((x) => print(x));
       print(resultData);
       return LoginResponseModels.fromJson(jsonDecode(response.body));
     } else {
@@ -156,8 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
       /* _formKey.currentState.save();
       print("Name $_email");
       print("Mobile $_mobile");*/
-     createAlbum(_mobileTextController.text,_passwordTextController.text);
-
+      createAlbum(_mobileTextController.text, _passwordTextController.text);
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {
