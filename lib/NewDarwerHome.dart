@@ -76,6 +76,7 @@ class _NewDrawerHomeState extends State<NewDrawerHome> {
               onTap: () =>
                   Navigator.pushReplacementNamed(context, pageRoutes.home)),
           new ListTile(
+
               title: new Text("Activity"),
               trailing: Icon(Icons.accessibility),
               onTap: () =>
