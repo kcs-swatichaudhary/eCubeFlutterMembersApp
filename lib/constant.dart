@@ -24,6 +24,10 @@ const String WS_STR_PASSWORD = "strWebPassword";
 //login sp
 const String USER_MEMBERCODE = "userDetail";
 const String IS_LOGIN = 'isLogin';
+const String SP_MEMEBER_ID = "memberId";
+const String SP_MEMEBER_FNAME = "memberFname";
+const String SP_MEMEBER_LNAME = "memberLname";
+const String SP_MEMEBER_IMAGE = "memberImage";
 
 
 

@@ -1,57 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pageRoutes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class NewDrawerHome extends StatelessWidget {
+import 'constant.dart';
+
+class NewDrawerHome extends StatefulWidget {
+  @override
+  _NewDrawerHomeState createState() => _NewDrawerHomeState();
+}
+
+class _NewDrawerHomeState extends State<NewDrawerHome> {
+  String memberFirstName;
+  String memberLastName;
+  String memberProfileImage;
+
+  @override
+  void initState() {
+    super.initState();
+    _getPost();
+  }
+
+  void _getPost() async {
+    memberFirstName = await getStringValuesSF();
+    memberLastName = await getStringValuesLname();
+    memberProfileImage = await getStringValuesUImage();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    // return new Scaffold(
-    //   // appBar: AppBar(
-    //   //   title: new Text("New App drawer"),
-    //   //   elevation: defaultTargetPlatform == TargetPlatform.android ? 0.5 : 0.0,
-    //   // ),
     return Drawer(
       child: new ListView(
         children: <Widget>[
-          new UserAccountsDrawerHeader(
-            accountName: new Text("swati chaudhary"),
-            accountEmail: new Text("swati.chaudhary@kcsitglobal.com"),
-            currentAccountPicture: new CircleAvatar(
-              backgroundColor: Colors.black,
-              child: new Text(
-                "S",
-                style: new TextStyle(fontSize: 24.00),
-              ),
-            ),
-            otherAccountsPictures: <Widget>[
-              new CircleAvatar(
-                backgroundColor: Colors.black,
-                child: new Text(
-                  "C",
-                  style: new TextStyle(fontSize: 24.00),
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.grey.shade500),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                CircleAvatar(
+                  backgroundImage: NetworkImage(memberProfileImage),
+                  radius: 30.0,
                 ),
-              )
-            ],
+                Flexible(child: Row(
+                /*  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,*/
+                  children: <Widget>[
+                    Text(
+                      '$memberFirstName' + '$memberLastName',
+                      maxLines: 2,
+                      overflow: TextOverflow.visible,
+                      softWrap: false,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                          fontSize: 15.0),
+                    ),
+                    /*SizedBox(height: 10.0),
+                    Text(
+                      'view Profile',
+                      style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                          fontSize: 10.0),
+                    ),*/
+                  ],
+                ) ,fit: FlexFit.loose,)
+
+              ],
+            ),
           ),
           new ListTile(
               title: new Text("Home"),
               trailing: Icon(Icons.home),
-              onTap: () => Navigator
-                  .pushReplacementNamed(context,pageRoutes.home)),
-          /* onTap: () {
-    Navigator.of(context).pop();
-    Navigator.of(context).pushNamed("/a");
-    }
-    ),*/
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, pageRoutes.home)),
           new ListTile(
               title: new Text("Activity"),
               trailing: Icon(Icons.accessibility),
-              onTap: () => Navigator
-                  .pushReplacementNamed(context,pageRoutes.activity)),
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, pageRoutes.activity)),
           new ListTile(
               title: new Text("Invoice"),
               trailing: Icon(Icons.file_download),
-              onTap: () => Navigator
-                  .pushReplacementNamed(context,pageRoutes.invoice)),
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, pageRoutes.invoice)),
           new ListTile(
             title: new Text("statement"),
             trailing: Icon(Icons.insert_drive_file),
@@ -71,12 +104,26 @@ class NewDrawerHome extends StatelessWidget {
         ],
       ),
     );
-    body:
-    new Container(
-      child: Center(
-        child: new Text(("Hello Drawer")),
-      ),
-    );
-    // );
+  }
+
+  Future<String> getStringValuesSF() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString(SP_MEMEBER_FNAME);
+    return stringValue;
+  }
+
+  Future<String> getStringValuesLname() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString(SP_MEMEBER_LNAME);
+    return stringValue;
+  }
+
+  Future<String> getStringValuesUImage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String stringValue = prefs.getString(SP_MEMEBER_IMAGE);
+    return stringValue;
   }
 }

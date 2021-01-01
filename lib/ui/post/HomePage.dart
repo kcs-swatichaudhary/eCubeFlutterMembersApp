@@ -58,7 +58,7 @@ Widget _buildList(BuildContext context) {
   ];
   return GridView.builder(
 
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,
+      gridDelegate: SliverGridD0elegateWithFixedCrossAxisCount(crossAxisCount: 3,
           crossAxisSpacing: 3.0,
           mainAxisSpacing: 3.0,
 
@@ -78,41 +78,6 @@ Widget _buildList(BuildContext context) {
           trailingIconTwo: new Icon(
             Icons.favorite, color: Colors.redAccent,),);
       });
-
-
-  // new ListView.builder(
-  //   // ignore: missing_return
-  //   itemCount: user.length,
-  //
-  //   itemBuilder: (context, index) {
-  //
-  //     return Container(
-  //       height: 100,
-  //       child: ListView(
-  //         children: <Widget>[
-  //           ListTile(
-  //             title: Text('${user[index]['name']}'),
-  //             subtitle: Text('${user[index]['age']}'),
-  //             leading:  new CircleAvatar(
-  //               backgroundImage: NetworkImage("https://as2.ftcdn.net/jpg/03/76/79/19/500_F_376791905_kXfIRv3zBqbze6CO1TuZgcuFDxdWLS1w.jpg"),
-  //             ),
-  //             trailing: Wrap(
-  //               spacing: 12,
-  //               children: <Widget>[
-  //                 Icon(Icons.delete),
-  //                 Icon(Icons.edit),
-  //               ],
-  //             ),
-  //             onTap: ()=>print("$index position clicked"),
-  //             dense: true,
-  //             // selected: true,
-  //           ),
-  //           Divider(),
-  //         ],
-  //       ),
-  //
-  //     );
-  //   });
 }
 
 class _PostList extends StatefulWidget {

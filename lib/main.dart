@@ -6,6 +6,7 @@ import 'package:flutter_app/pageRoutes.dart';
 import 'package:flutter_app/ui/login/login_view.dart';
 import 'package:flutter_app/ui/post/HomePage.dart';
 import 'package:flutter_app/ui/post/Invoice.dart';
+import 'package:flutter_app/ui/splash_view.dart';
 
 
 
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.deepOrange,
       ),
-      home: LoginScreen(title: appName,),
+      // home: LoginScreen(title: appName,),
+      home: SplashScreen(),
     /*  routes: <String, WidgetBuilder>{
         "/a":(BuildContext context)=>new Invoice("Invoice"),
     }*/

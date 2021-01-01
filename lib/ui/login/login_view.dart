@@ -21,9 +21,8 @@ import '../Album.dart';
 
 // import 'package:flutter_app/ui/post/post_view.dart';
 class LoginScreen extends StatefulWidget {
-  final String title;
 
-  LoginScreen({Key key, @required this.title}) : super(key: key);
+
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -111,55 +110,39 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (response.statusCode == 200) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
-      print(response.body);
-      /*List<LoginResponseResultModel> resultData;
-      resultData=(json.decode(response.body) as List).map((i) =>
-          LoginResponseResultModel.fromJson(i)).toList();*/
-      Map<String, dynamic> map = json.decode(response.body);
-      List<LoginResponseResultModel> resultData = map.values.toList()[3].forEach((x) => print(x));
-      print(resultData);
-      return LoginResponseModels.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.      throw Exception('Failed to load album');
+      try {
+        if (jsonDecode(response.body) != null) {
+          var data = jsonDecode(response.body)['Result'];
+          _onSaveData(data['GetMemberLogin'][0]);
+          print(data['GetMemberLogin'][0]);
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => HomePage()));
+        }
+
+        else {
+          // If the server did not return a 201 CREATED response,
+          // then throw an exception.      throw Exception('Failed to load album');
+        }
+      }
+      catch(e){
+        print(e);
+      }
     }
   }
 
-  void _onSaveData(String user) async {
+  void _onSaveData(data) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(USER_MEMBERCODE, user);
+    pref.setInt(SP_MEMEBER_ID, data['MemberId']);
+    pref.setString(SP_MEMEBER_FNAME, data['FName']);
+    pref.setString(SP_MEMEBER_LNAME, data['LName']);
+    pref.setString(SP_MEMEBER_IMAGE, data['ImageName']);
     pref.setBool(IS_LOGIN, true);
   }
 
   void login() {
-    /* setState(() {
-      _text.text.isEmpty ? _validate = true : _validate = false;
-      _textPswd.text.isEmpty ? _validate = true : _validate = false;
-    });
-    // simulate the login
-    Future.delayed(Duration(seconds: 2)).then((_) {
-
-      // all your code to sign in
-      if (_formKey.currentState.validate()) {
-        // If the form is valid, display a Snackbar.
-        Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text('Processing Data')));
-      } else {
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context) => homePage()));
-      }
-    });*/
-
     if (_formKey.currentState.validate()) {
-//    If all data are correct then save data to out variables
-      /* _formKey.currentState.save();
-      print("Name $_email");
-      print("Mobile $_mobile");*/
       createAlbum(_mobileTextController.text, _passwordTextController.text);
     } else {
-//    If all data are not valid then start auto validation.
       setState(() {
         _autoValidate = true;
       });
@@ -179,35 +162,45 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget FormUI() {
     return new Column(
       children: <Widget>[
-        new TextFormField(
-          controller: _mobileTextController,
-          decoration: new InputDecoration(hintText: "Enter Email"),
-          keyboardType: TextInputType.emailAddress,
-          onSaved: (String val) {
-            _email = val;
-          },
-          /*  controller: _text,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                      validator: (String arg) {
-                                        if(arg.length < 3)
-                                          return 'Name must be more than 2 charater';
-                                        else
-                                          return null;
-                                        },*/
-        ),
-        new TextFormField(
-          controller: _passwordTextController,
-          style: TextStyle(
-            color: Colors.black,
+
+        Container(
+          child: new TextFormField(
+            controller: _mobileTextController,
+            decoration: new InputDecoration(hintText: "Enter Email",focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.deepOrange)
+            )),
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (String val) {
+              _email = val;
+            },
+            /*  controller: _text,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                        validator: (String arg) {
+                                          if(arg.length < 3)
+                                            return 'Name must be more than 2 charater';
+                                          else
+                                            return null;
+                                          },*/
           ),
-          decoration: new InputDecoration(hintText: "Enter Password"),
-          obscureText: true,
-          keyboardType: TextInputType.visiblePassword,
-          onSaved: (String val) {
-            strPassCode = val;
-          },
+        ),
+        Container(
+          padding: EdgeInsets.only(top:35.0),
+          child: new TextFormField(
+            controller: _passwordTextController,
+            style: TextStyle(
+              color: Colors.black,
+            ),
+            decoration: new InputDecoration(hintText: "Enter Password",focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.deepOrange)
+            )),
+            obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            onSaved: (String val) {
+              strPassCode = val;
+            },
+          ),
         ),
         new Padding(
           padding: const EdgeInsets.only(top: 20.0),
