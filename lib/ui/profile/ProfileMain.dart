@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ui/profile/personal_view.dart';
-import 'package:sticky_headers/sticky_headers/widget.dart';
 
 import 'ContactScreen.dart';
 import 'MemberShip_view.dart';
