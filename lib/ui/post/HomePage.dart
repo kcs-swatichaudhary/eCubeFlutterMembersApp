@@ -4,6 +4,7 @@ import 'package:flutter_app/NewDarwerHome.dart';
 
 // import 'package:flutter_app/ui/post/post_view.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_app/ui/post/post_item.dart';
 
 import '../CustomWidget.dart';
 
@@ -58,7 +59,7 @@ Widget _buildList(BuildContext context) {
   ];
   return GridView.builder(
 
-      gridDelegate: SliverGridD0elegateWithFixedCrossAxisCount(crossAxisCount: 3,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,
           crossAxisSpacing: 3.0,
           mainAxisSpacing: 3.0,
 
@@ -88,6 +89,10 @@ class _PostList extends StatefulWidget {
 class LisState extends State {
   @override
   Widget build(BuildContext context) {
-    return _buildList(context);
+    return Container(
+      child: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context,index)=>PostItem()),
+    );
   }
 }

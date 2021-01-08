@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pageRoutes.dart';
+import 'package:flutter_app/ui/homePage.dart';
+import 'package:flutter_app/ui/post/HomePage.dart';
+import 'package:flutter_app/ui/profile/ProfileMain.dart';
+import 'package:flutter_app/ui/profile/ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constant.dart';
@@ -29,81 +33,523 @@ class _NewDrawerHomeState extends State<NewDrawerHome> {
 
   @override
   Widget build(BuildContext context) {
+    List<NavgationItemsModel> data = new List<NavgationItemsModel>();
+    data.add(NavgationItemsModel("MEMBERAREA", Icons.add));
+    data.add(NavgationItemsModel("BOOKING", Icons.add));
+    data.add(NavgationItemsModel("MEMBER AREA", Icons.add));
+    data.add(NavgationItemsModel("CLUBFACILTIES", Icons.add));
     return Drawer(
-      child: new ListView(
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.grey.shade500),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: NetworkImage(memberProfileImage),
-                  radius: 30.0,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+                image: AssetImage("assets/bg_nav_drawer.jpeg"),
+                fit: BoxFit.cover)),
+        child: new ListView(
+          children: <Widget>[
+            Container(
+              child: DrawerHeader(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 40.0),
+                  child: Row(
+                    children: <Widget>[
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(memberProfileImage),
+                        radius: 30.0,
+                      ),
+                      Flexible(
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                          child: Wrap(
+                            /*  mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,*/
+                            direction: Axis.horizontal, //default
+                            children: <Widget>[
+                              Text(
+                                '$memberFirstName' + '$memberLastName',
+                                overflow: TextOverflow.visible,
+                                softWrap: true,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.white,
+                                    fontSize: 14.0),
+                              ),
+                              InkWell(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 6.0),
+                                  child: Text(
+                                    'view Profile',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                        fontSize: 12.0),
+                                  ),
+                                ),
+                                onTap: () {
+                                  _navigateAndDisplaySelection(context);
+                                }, // Handle your callback
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                Flexible(child: Row(
-                /*  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,*/
-                  children: <Widget>[
-                    Text(
-                      '$memberFirstName' + '$memberLastName',
-                      maxLines: 2,
-                      overflow: TextOverflow.visible,
-                      softWrap: false,
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white,
-                          fontSize: 15.0),
-                    ),
-                    /*SizedBox(height: 10.0),
-                    Text(
-                      'view Profile',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.white,
-                          fontSize: 10.0),
-                    ),*/
-                  ],
-                ) ,fit: FlexFit.loose,)
+              ),
+            ),
+           Column(
+              children: <Widget>[
+                buildListTileWithoutColor(
+                    icon: "assets/ic_home.jpeg",
+                    text: "Home",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                createDrawerBodyItem(icon: Icons.home, text: "MEMBER AREA"),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_activity.jpeg",
+                    text: "Activity",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_invoice.png", text: "Invoice",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_movie.png", text: "Statement",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                createDrawerBodyItem(icon: Icons.home, text: "BOOKING"),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_movie.png", text: "Movie Booking",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_event.png", text: "Event",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_package.jpeg",
+                    text: "Packages Subscription",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_menuservice.png", text: "Service Booking",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                createDrawerBodyItem(
+                    icon: Icons.home, text: "CLUB FACILITIES"),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_amenities.png",
+                    text: "Amenities",
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, HomePage.routeName)),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_info.png",
+                    text: "Info",
+                    onTap: () => Navigator.pushReplacementNamed(
+                        context, HomePage.routeName)),
+                createDrawerBodyItem(icon: Icons.home, text: "SETTINGS"),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_changepassword.png", text: "Change Password",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    )),
+                buildListTileWithoutColor(
+                    icon: "assets/ic_logout.png", text: "Logout",
+                    onTap: () =>  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    ))
               ],
             ),
-          ),
-          new ListTile(
-              title: new Text("Home"),
-              trailing: Icon(Icons.home),
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, pageRoutes.home)),
-          new ListTile(
+          ],
+        ),
+      ),
+    );
+  }
 
-              title: new Text("Activity"),
-              trailing: Icon(Icons.accessibility),
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, pageRoutes.activity)),
-          new ListTile(
-              title: new Text("Invoice"),
-              trailing: Icon(Icons.file_download),
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, pageRoutes.invoice)),
-          new ListTile(
-            title: new Text("statement"),
-            trailing: Icon(Icons.insert_drive_file),
+  ListTile buildListTileWithoutColor(
+      { String text, GestureTapCallback onTap, String icon}) {
+    return ListTile(
+        title: Row(
+      children: <Widget>[
+        ImageIcon(new AssetImage(icon),color: Colors.white,),
+        Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: Text(
+            text,
+            style: TextStyle(color: Colors.white, fontSize: 16.0),
+
           ),
-          new ListTile(
-            title: new Text("Movie Booking"),
-            trailing: Icon(Icons.movie),
+        ),
+      ],
+
+    )
+    ,onTap: onTap,);
+  }
+
+  Widget createDrawerBodyItem(
+      {IconData icon, String text, GestureTapCallback onTap}) {
+    return ListTile(
+      title: Column(
+        children: <Widget>[
+          Container(
+            width: 1000,
+            color: Color(0xff2c2e31),
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(left: 15.0, top: 8.0, bottom: 15.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    text,
+                    style: TextStyle(color: Colors.white, fontSize: 15.0),
+                  ),
+                ],
+              ),
+            ),
           ),
-          new ListTile(
-            title: new Text("Event"),
-            trailing: Icon(Icons.event),
+          Divider(
+            thickness: 1.5,
+            color: Colors.deepOrange,
           ),
-          new ListTile(
-            title: new Text("Packages Subscription"),
-            trailing: Icon(Icons.subscriptions),
-          )
         ],
       ),
+      onTap: onTap,
     );
   }
 
@@ -127,4 +573,19 @@ class _NewDrawerHomeState extends State<NewDrawerHome> {
     String stringValue = prefs.getString(SP_MEMEBER_IMAGE);
     return stringValue;
   }
+
+  _navigateAndDisplaySelection(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ShowMemberData()),
+    );
+    print("profile successfully edit" + result);
+  }
+}
+
+class NavgationItemsModel {
+  String title = "";
+  IconData icon;
+
+  NavgationItemsModel(this.title, this.icon);
 }

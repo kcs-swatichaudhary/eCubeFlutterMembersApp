@@ -3,7 +3,7 @@ import 'package:flutter_app/ui/DrawerItem.dart';
 // import 'package:flutter_app/ui/post/post_view.dart';
 
 // ignore: camel_case_types
-class homePage extends StatelessWidget {
+/*class homePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,4 +13,4 @@ class homePage extends StatelessWidget {
       body: Center(child: Text('Home'),),
     );
   }
-}
+}*/

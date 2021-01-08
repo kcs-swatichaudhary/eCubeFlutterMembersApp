@@ -166,9 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           child: new TextFormField(
             controller: _mobileTextController,
-            decoration: new InputDecoration(hintText: "Enter Email",focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.deepOrange)
-            )),
+            decoration: new InputDecoration(hintText: "Enter Email",),
             keyboardType: TextInputType.emailAddress,
             onSaved: (String val) {
               _email = val;
@@ -192,9 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
             style: TextStyle(
               color: Colors.black,
             ),
-            decoration: new InputDecoration(hintText: "Enter Password",focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.deepOrange)
-            )),
+            decoration: new InputDecoration(hintText: "Enter Password",),
             obscureText: true,
             keyboardType: TextInputType.visiblePassword,
             onSaved: (String val) {

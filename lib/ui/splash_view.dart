@@ -43,7 +43,7 @@ class _MyHomePageState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        child: FlutterLogo(size: MediaQuery.of(context).size.height));
+        child: Image(image: AssetImage("assets/splash.jpeg")));
   }
 
   static Future<bool> isLogin() async {
